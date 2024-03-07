@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task 🧮 </title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #wrapper{
+            width: 100%;
+            height: 100vh;
+            background-color: goldenrod;
+
+            /* CENTERILIZATION */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        #wrapper .container{
+            width: 50%;
+            /* height: 200px; */
+            background-color: whitesmoke;
+            box-shadow:  .1px .11px 41px .11px #000133;          
+            border: none;
+            border-radius: 0.4rem;
+            padding: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+
+        }
+
+        
+        #wrapper .container h1{
+            font-variant: small-caps;
+            font-family: cursive;
+            color: #000133;
+            font-weight: bold;
+        }
+
+        #wrapper .container .inputContainer{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #wrapper .container input{
+            padding: .7rem;
+            width: 75%;
+            outline: none;
+        }
+        #wrapper .container input::placeholder{
+            font-size: 1rem;
+            color: #000133;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        #wrapper .container button{
+            background-color: #000133;
+            color: whitesmoke;
+            text-align: center;
+            padding: 1rem;
+            width: 30%;
+            margin-left: -5rem;
+            border: none;
+            border-radius: 5rem;
+            box-shadow:  .1px .11px 41px .11px #48484d;   
+        }
+
+        #wrapper .container button:hover{
+            cursor: pointer;
+            padding: 1.2rem;
+            transition: all 1s;
+        }
+        #listContainer{
+            /* list-style: ; */
+            margin-left: 5rem;
+            padding: 2rem;
+        }
+
+        #listContainer li{
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            cursor: grab;
+
+        }
+
+        #listContainer li::before{
+            content: "🤝  ";
+        }
+
+        #listContainer li img{
+            width: 5%;
+            margin-left: 7rem;
+            border-radius: 50%;
+        }
+
+        #listContainer li img:hover{
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: all 1s;
+        }
+
+        #listContainer li.lines{
+            text-decoration: line-through;
+            color:red;
+        }
+
+
+        #listContainer li.lines::before{
+            content: "📏 ";
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="container">
+            <h1>to-do app🔖</h1>
+          
+            <div class="inputContainer">
+                <input type="text" value="" placeholder="enter a task 😻 " id="inputValue">
+                <button id="btn" onclick="task()">add 🚮 </button>
+            </div>
+
+            <ul id="listContainer">
+                <!-- <li>items <img src="https://th.bing.com/th/id/OIP.Wlbo5imZK-p3H2uNVBO_CQHaHa?rs=1&pid=ImgDetMain" alt="trash icon"></li>
+                <li>items <img src="https://th.bing.com/th/id/OIP.Wlbo5imZK-p3H2uNVBO_CQHaHa?rs=1&pid=ImgDetMain" alt="trash icon"></li> -->
+                
+            </ul>
+        </div>
+        
+    </div>
+</body>
+
+<script>
+    let inputValue = document.getElementById("inputValue");
+    let listContainer = document.getElementById("listContainer");
+    let srcFile ="https://th.bing.com/th/id/OIP.Wlbo5imZK-p3H2uNVBO_CQHaHa?rs=1&pid=ImgDetMain";
+
+    function task() {
+
+        if(inputValue.value === "" || inputValue.value === null){
+            alert('please add a task');
+        }else{
+
+            let li = document.createElement('li');
+            li.innerText = inputValue.value;
+            listContainer.append(li);
+
+            let img = document.createElement("img");
+            img.src = srcFile
+            img.alt="delete icon";
+            // span.append(img);
+            li.append(img);
+            
+
+        }
+        inputValue.value = " "
+        // console.log(inputValue.value)
+
+    }
+
+    listContainer.addEventListener('click', function(e){
+        console.log(e.target.parentElement)
+        
+        if(e.target.tagName.toLowerCase() === "li"){
+            e.target.classList.toggle("lines");
+        }else if(e.target.tagName.toLowerCase() === "img"){
+            e.target.parentElement.remove();
+        }
+    })
+</script>
+</html>
